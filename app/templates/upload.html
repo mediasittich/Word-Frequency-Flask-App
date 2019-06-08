@@ -2,25 +2,31 @@
 
 {% block content %}
     <form action="" method="post" enctype="multipart/form-data">
-        Select file to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload File" name="submit">
+        <div class="form-group">
+            <label for="fileToUpload">Select file to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload" class="form-control-file">
+        </div>
+        
+        <input type="submit" value="Upload File" name="submit" class="btn btn-primary mb-2">
     </form>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-                <p>{{ message }}</p>
+                <p class="alert alert-info" role="alert">{{ message }}</p>
             {% endfor %}
         {% endif %}
     {% endwith %}
 
     {% if files %}
-        <ul>
+        <ul class="list-group">
             {% for file in files%}
-                <li>
-                    {{ file }}
-                    <a href="{{ file.rsplit('.', 1)[0] }}">View Text Stats</a>
+                <li class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <p>{{ file }}</p>
+                        <a href="{{ file.rsplit('.', 1)[0] }}"  class="btn btn-info">View Text Stats</a>
+                    </div>
+                    
                 </li>
             {% endfor %}
         </ul>
